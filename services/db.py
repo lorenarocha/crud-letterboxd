@@ -3,12 +3,18 @@ import pandas as pd
 import os
 
 #finding data path
-PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data')
+PY_SRC = os.path.dirname(os.path.realpath(__file__))
+APP_SRC = os.path.dirname(PY_SRC)
+PATH = os.path.join(APP_SRC, 'data')
 DB_NAME = input('Enter the database name you want to create:')
+
+USER = 'root'
+PASSWD = 'admin'
+HOST = 'localhost'
     
 #open connection   
 def open_conn():
-    conn = sqlalchemy.create_engine('mysql+pymysql://root:admin@localhost/', echo=True)
+    conn = sqlalchemy.create_engine(f'mysql+pymysql://{USER}:{PASSWD}@{HOST}/', echo=True)
     print('Connection created with MySQL')
     return conn
 
